@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default class AddBtn extends React.Component{
-    render(){
-        return(
-            <a className="close-search" onClick={this.props.goHome}>Close</a>
-        );
-    }
+const GoHome = (props) => {
+    return (
+        <a className="close-search" onClick={props.goHome}>Close</a>
+    );
 }
+
+export default GoHome;
