@@ -19,12 +19,12 @@ class BooksApp extends React.Component {
   getBooks = () => {
     BooksAPI
       .getAll()
-      .then(allBooks => this.setState({allBooks}));
+      .then(data => this.setState({books: data}));
   }
   updateBooks = (book, shelf) => {
     BooksAPI
       .update(book, shelf)
-      .then(data => this.getBooks);
+      .then(data => this.setState({data}));
   }
   componentDidMount = () => {
     this.getBooks();
@@ -45,7 +45,19 @@ class BooksApp extends React.Component {
               <Header/>
               <Shelves
                 books={this.state.books}
-                wantToReadBooks={this.state.wantToRead}
+                read={this
+                .state
+                .books
+                .filter(data => data.shelf === 'read')}
+                wantToRead={this
+                .state
+                .books
+                .filter(data => data.shelf === 'wantToRead')}
+                currentlyReading={this
+                .state
+                .books
+                .filter(data => data.shelf === 'currentlyReading')}
+                updateBooks={this.updateBooks}
                 showSearch={this.showSearch}/>
             </div>
           )}

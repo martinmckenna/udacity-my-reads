@@ -3,7 +3,7 @@ import '../styles/App.css'
 import Shelf from '../components/Shelf.js'
 import AddBtn from '../components/AddBtn.js'
 
-export default class Shelves extends React.Component {
+const Shelves = props => {
     // state = {     readBooks: [],     currentlyReadingBooks: [], wantToReadBooks:
     // [] } getReadBooks = () => {     this         .props .books .filter(element
     // => element.shelf === 'read') .map(filtered => this.setState({read:
@@ -14,33 +14,34 @@ export default class Shelves extends React.Component {
     // element.shelf === 'wantToRead')         .map(filtered => this.setState({read:
     // [filtered]})); } componentDidMount = () => { this.getReadBooks();
     // this.getCurrentlyReadingBooks(); this.getWantToReadBooks(); }
-    componentDidMount = () => {
-        console.log(this.props.books);
-    }
-    render = () => {
-        return (
-            <div className="list-books">
-                <div className="list-books-content">
-                    <div>
-                        <Shelf
-                            updateBooks={this.props.updateBooks}
-                            title="Currently Reading"
-                            whatShelf="currentlyReading"
-                            allBooks={this.props.books}/>
-                        <Shelf
-                            updateBooks={this.props.updateBooks}
-                            title="Read"
-                            whatShelf="read"
-                            allBooks={this.props.books}/>
-                        <Shelf
-                            updateBooks={this.props.updateBooks}
-                            title="Want to Read"
-                            whatShelf="wantToRead"
-                            allBooks={this.props.books}/>
-                    </div>
+
+    return (
+        <div className="list-books">
+            <div className="list-books-content">
+                <div>
+                    <Shelf
+                        updateBooks={props.updateBooks}
+                        title="Currently Reading"
+                        whatShelf="currentlyReading"
+                        filteredList={props.currentlyReading}
+                        allBooks={props.books}/>
+                    <Shelf
+                        updateBooks={props.updateBooks}
+                        title="Read"
+                        whatShelf="read"
+                        filteredList={props.read}
+                        allBooks={props.books}/>
+                    <Shelf
+                        updateBooks={props.updateBooks}
+                        title="Want to Read"
+                        whatShelf="wantToRead"
+                        filteredList={props.wantToRead}
+                        allBooks={props.books}/>
                 </div>
-                <AddBtn showSearch={this.props.showSearch}/>
             </div>
-        );
-    }
+            <AddBtn showSearch={props.showSearch}/>
+        </div>
+    );
 }
+
+export default Shelves;

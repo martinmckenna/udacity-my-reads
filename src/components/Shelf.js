@@ -8,10 +8,9 @@ export default class Shelf extends React.Component {
             <div className="bookshelf">
                 <h2 className="bookshelf-title">{this.props.title}</h2>
                 <div className="bookshelf-books">
-
                     <ol className="books-grid">{this
                             .props
-                            .allBooks
+                            .filteredList
                             .map(element => <li key={element.title}>
                                 <div className="book">
                                     <div className="book-top">
