@@ -4,17 +4,6 @@ import Shelf from '../components/Shelf.js'
 import AddBtn from '../components/AddBtn.js'
 
 const Shelves = props => {
-    // state = {     readBooks: [],     currentlyReadingBooks: [], wantToReadBooks:
-    // [] } getReadBooks = () => {     this         .props .books .filter(element
-    // => element.shelf === 'read') .map(filtered => this.setState({read:
-    // [filtered]})); } getCurrentlyReadingBooks = () => { this         .props
-    // .books     .filter(element => element.shelf === 'currentlyReading')
-    // .map(filtered => this.setState({read: [filtered]})); } getWantToReadBooks =
-    // () => {     this         .props         .books .filter(element =>
-    // element.shelf === 'wantToRead')         .map(filtered => this.setState({read:
-    // [filtered]})); } componentDidMount = () => { this.getReadBooks();
-    // this.getCurrentlyReadingBooks(); this.getWantToReadBooks(); }
-
     return (
         <div className="list-books">
             <div className="list-books-content">
