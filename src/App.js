@@ -1,8 +1,9 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
+//import * as BooksAPI from './utils/BooksAPI'
 import './styles/App.css'
 import Search from './views/Search.js'
 import Shelves from './views/Shelves.js'
+import Header from './components/Header.js'
 
 class BooksApp extends React.Component {
   state = {
@@ -25,7 +26,19 @@ class BooksApp extends React.Component {
       <div className="app">
         {this.state.showSearchPage
           ? (<Search goHome={this.goHome}/>)
-          : (<Shelves showSearch={this.showSearch}/>)}
+          : (
+            <div>
+              <Header/>
+              <Shelves title="Read" whatShelf="read" showSearch={this.showSearch}/>
+              <Shelves
+                title="Currently Reading"
+                whatShelf="currentlyReading"
+                showSearch={this.showSearch}/>
+              <Shelves
+                title="Want to Read"
+                whatShelf="wantToRead"
+                showSearch={this.showSearch}/></div>
+          )}
       </div>
     )
   }
