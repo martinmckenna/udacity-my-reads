@@ -1,5 +1,9 @@
 import React from 'react'
+<<<<<<< HEAD
 import * as BooksAPI from './utils/BooksAPI'
+=======
+//import * as BooksAPI from './utils/BooksAPI'
+>>>>>>> 8088e60f270956d21e03578dae3b61952142b2b9
 import './styles/App.css'
 import Search from './views/Search.js'
 import Shelves from './views/Shelves.js'
@@ -45,6 +49,7 @@ class BooksApp extends React.Component {
           : (
             <div>
               <Header/>
+<<<<<<< HEAD
               <Shelves
                 books={this.state.books}
                 read={this
@@ -62,6 +67,17 @@ class BooksApp extends React.Component {
                 updateBooks={this.updateBooks}
                 showSearch={this.showSearch}/>
             </div>
+=======
+              <Shelves title="Read" whatShelf="read" showSearch={this.showSearch}/>
+              <Shelves
+                title="Currently Reading"
+                whatShelf="currentlyReading"
+                showSearch={this.showSearch}/>
+              <Shelves
+                title="Want to Read"
+                whatShelf="wantToRead"
+                showSearch={this.showSearch}/></div>
+>>>>>>> 8088e60f270956d21e03578dae3b61952142b2b9
           )}
       </div>
     )

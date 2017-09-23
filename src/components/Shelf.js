@@ -1,5 +1,6 @@
 import React from 'react';
 
+<<<<<<< HEAD
 //import * as BooksAPI from '../utils/BooksAPI'
 
 const Shelf = (props) => {
@@ -42,5 +43,12 @@ const Shelf = (props) => {
 
     );
 }
+=======
+const Shelf = (props) => {
+    return (
+        <div>Hello</div>
+    );
+};
+>>>>>>> 8088e60f270956d21e03578dae3b61952142b2b9
 
 export default Shelf;
