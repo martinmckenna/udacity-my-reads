@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/App.css'
 
-import GoHome from '../components/GoHome.js'
+import GoHome from '../components/GoHome.js';
 
 const Search = (props) => {
   return (

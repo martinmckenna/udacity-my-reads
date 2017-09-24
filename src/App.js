@@ -4,19 +4,13 @@ import './styles/App.css'
 import Search from './views/Search.js'
 import Shelves from './views/Shelves.js'
 import Header from './components/Header.js'
+import {Route} from 'react-router-dom';
 
 class BooksApp extends React.Component {
   state = {
     books: [],
     searchResults: [],
-    query: '',
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    showSearchPage: false
+    query: ''
   }
   updateQuery = (query) => {
     this.setState({query: query});
@@ -32,7 +26,6 @@ class BooksApp extends React.Component {
         });
 
     }
-
   }
   getBooks = () => {
     BooksAPI
@@ -61,34 +54,33 @@ class BooksApp extends React.Component {
   render = () => {
     return (
       <div className="app">
-        {this.state.showSearchPage
-          ? (<Search
-            updateQuery={this.updateQuery}
-            query={this.state.query}
-            searchResults={this.state.searchResults}
-            updateBooks={this.updateBooks}
-            goHome={this.goHome}/>)
-          : (
-            <div>
-              <Header/>
-              <Shelves
-                books={this.state.books}
-                read={this
-                .state
-                .books
-                .filter(data => data.shelf === 'read')}
-                wantToRead={this
-                .state
-                .books
-                .filter(data => data.shelf === 'wantToRead')}
-                currentlyReading={this
-                .state
-                .books
-                .filter(data => data.shelf === 'currentlyReading')}
-                updateBooks={this.updateBooks}
-                showSearch={this.showSearch}/>
-            </div>
-          )}
+        <Route
+          path="/search"
+          render={() => (<Search
+          updateQuery={this.updateQuery}
+          query={this.state.query}
+          searchResults={this.state.searchResults}
+          updateBooks={this.updateBooks}/>)}/>
+        <Route
+          exact
+          path="/"
+          render={() => (
+          <div><Header/><Shelves
+            books={this.state.books}
+            read={this
+            .state
+            .books
+            .filter(data => data.shelf === 'read')}
+            wantToRead={this
+            .state
+            .books
+            .filter(data => data.shelf === 'wantToRead')}
+            currentlyReading={this
+            .state
+            .books
+            .filter(data => data.shelf === 'currentlyReading')}
+            updateBooks={this.updateBooks}/></div>
+        )}/>
       </div>
     )
   }

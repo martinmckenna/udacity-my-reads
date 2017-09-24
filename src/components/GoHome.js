@@ -1,8 +1,9 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const GoHome = (props) => {
     return (
-        <a className="close-search" onClick={props.goHome}>Close</a>
+        <Link to="/" className="close-search">Close</Link>
     );
 }
 
