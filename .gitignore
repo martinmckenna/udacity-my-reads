@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
@@ -20,8 +19,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-=======
-node_modules
-yarn.lock
-.DS_Store
->>>>>>> 5564ada28945e57e4421fe3ae1b458d23966cf0d
