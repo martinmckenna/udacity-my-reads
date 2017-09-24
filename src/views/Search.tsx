@@ -18,6 +18,7 @@ const Search = (props: any) => {
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
+          {/* Only if we have search results and there is no error do we want to render them */}
           {props.searchResults && !props.searchResults.error
             ? (props.searchResults.map((element: any, index: number) => <li key={element.id}>
               <div className="book">

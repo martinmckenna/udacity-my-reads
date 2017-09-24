@@ -10,15 +10,17 @@ class BooksApp extends React.Component<{}, {}> {
   state = {
     books: [],
     searchResults: [],
-    query: '',
-    defaultValueForSearchedBook: 'none'
+    query: ''
   };
+  // updateQuery is updating the state with the typed input and searching the DB with that input
   updateQuery = (query: string): void => {
     this.setState({query: query});
     if (query !== '') {
       BooksAPI
         .search(query, 20)
         .then(data => {
+          // if we have results, send them to the state
+          // if not, just give us back an empty array
           if (!data.error) {
             this.setState({searchResults: data});
           } else {
@@ -28,6 +30,7 @@ class BooksApp extends React.Component<{}, {}> {
     }
   }
   getBooks = (): any => {
+    // simply get a list of all the books on the shelf and send them to the state
     return BooksAPI
       .getAll()
       .then(data => this.setState({books: data}))
@@ -35,12 +38,14 @@ class BooksApp extends React.Component<{}, {}> {
       
   }
 updateBooks = (book: any, shelf: string): void => {
+  // takes two arguments. The book in question and the shelf we want to send it to
     BooksAPI
       .update(book, shelf)
       .then((data: any) => this.getBooks())
       .catch((err: any) => console.log(`${err}: there was an error updating all the books!`));
   }
   componentDidMount(): void {
+    // get the updated list of books on each render
     this.getBooks();
     BooksAPI
       .getAll()
@@ -53,7 +58,6 @@ updateBooks = (book: any, shelf: string): void => {
           path="/search"
           render={() => (
             <Search
-              defaultValueForSearchedBook={this.state.defaultValueForSearchedBook}
               addedBooks={this.state.books}
               updateQuery={this.updateQuery}
               query={this.state.query}
@@ -62,6 +66,8 @@ updateBooks = (book: any, shelf: string): void => {
             />
             )}
         />
+        {/* We're going to filter the list of books on shelves inline here, 
+        so that we can pass the filtered array to the correct shelf */}
         <Route
           exact={true}
           path="/"
