@@ -1,15 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 
-//import * as BooksAPI from '../utils/BooksAPI'
+// import * as BooksAPI from '../utils/BooksAPI'
 
-const Shelf = (props) => {
+const Shelf = (props: any) => {
     return (
         <div className="bookshelf">
-            <h2 className="bookshelf-title">{props.title}</h2>
+            <h2 className="bookshelf-title">{props.category}</h2>
             <div className="bookshelf-books">
-                <ol className="books-grid">{props
-                        .filteredList
-                        .map(element => <li key={element.title}>
+                <ol className="books-grid">{props.filteredList
+                        .map((element: any) => <li key={element.id}>
                             <div className="book">
                                 <div className="book-top">
                                     <div className="book-cover"><img
@@ -18,12 +17,14 @@ const Shelf = (props) => {
                             height: 193
                         }}
                                         alt="The book cover"
-                                        src={element.imageLinks.thumbnail}/></div>
+                                        src={element.imageLinks.thumbnail}
+                                    /></div>
                                     <div className="book-shelf-changer">
                                         <select
                                             defaultValue={element.shelf}
-                                            onChange={(event) => props.updateBooks(element, event.target.value)}>
-                                            <option value="none" disabled>Move to...</option>
+                                            onChange={(event) => props.updateBooks(element, event.target.value)}
+                                        >
+                                            <option value="none" disabled={true}>Move to...</option>
                                             <option value="currentlyReading">Currently Reading</option>
                                             <option value="wantToRead">Want to Read</option>
                                             <option value="read">Read</option>
@@ -34,13 +35,13 @@ const Shelf = (props) => {
                                 <div className="book-title">{element.title}</div>
                                 <div className="book-authors">{element
                                         .authors
-                                        .map(element => <p key={element}>{element}</p>)}</div>
+                                        .map((author: any) => <p key={element.authors[0]}>{author}</p>)}</div>
                             </div>
                         </li>)}</ol>
             </div>
         </div>
 
     );
-}
+};
 
 export default Shelf;

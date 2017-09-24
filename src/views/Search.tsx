@@ -1,9 +1,9 @@
-import React from 'react'
-import '../styles/App.css'
+import * as React from 'react';
+import '../styles/App.css';
 
-import GoHome from '../components/GoHome.js';
+import GoHome from '../components/GoHome';
 
-const Search = (props) => {
+const Search = (props: any) => {
   return (
     <div className="search-books">
       <div className="search-books-bar">
@@ -12,13 +12,14 @@ const Search = (props) => {
           <input
             onChange={event => props.updateQuery(event.target.value.trim())}
             type="text"
-            placeholder="Search by title or author"/>
+            placeholder="Search by title or author"
+          />
         </div>
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
           {props.searchResults && !props.searchResults.error
-            ? (props.searchResults.map(element => <li key={element.id}>
+            ? (props.searchResults.map((element: any) => <li key={element.id}>
               <div className="book">
                 <div className="book-top">
                   {element.imageLinks
@@ -29,14 +30,16 @@ const Search = (props) => {
                         height: 193
                       }}
                         alt="The book cover"
-                        src={element.imageLinks.thumbnail}/></div>
+                        src={element.imageLinks.thumbnail}
+                      /></div>
                     )
-                    : <div></div>}
+                    : <div/>}
                   <div className="book-shelf-changer">
                     <select
                       defaultValue="none"
-                      onChange={(event) => props.updateBooks(element, event.target.value)}>
-                      <option value="none" disabled>Move to...</option>
+                      onChange={(event) => props.updateBooks(element, event.target.value)}
+                    >
+                      <option value="none" disabled={true}>Move to...</option>
                       <option value="currentlyReading">Currently Reading</option>
                       <option value="wantToRead">Want to Read</option>
                       <option value="read">Read</option>
@@ -49,16 +52,16 @@ const Search = (props) => {
                   ? (
                     <div className="book-authors">{element
                         .authors
-                        .map(element => <p key={element}>{element}</p>)}</div>
+                        .map((author: any) => <p key={element.authors[0]}>{author}</p>)}</div>
                   )
-                  : <div></div>}
+                  : <div/>}
               </div>
             </li>))
-            : <li></li>}
+            : <li/>}
         </ol>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Search;
