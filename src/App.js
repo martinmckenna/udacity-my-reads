@@ -8,6 +8,8 @@ import Header from './components/Header.js'
 class BooksApp extends React.Component {
   state = {
     books: [],
+    searchResults: [],
+    query: '',
     /**
      * TODO: Instead of using this state variable to keep track of which page
      * we're on, use the URL in the browser's address bar. This will ensure that
@@ -16,11 +18,27 @@ class BooksApp extends React.Component {
      */
     showSearchPage: false
   }
+  updateQuery = (query) => {
+    this.setState({query: query});
+    if (query !== '') {
+      BooksAPI
+        .search(query, 20)
+        .then(data => {
+          if (!data.error) {
+            this.setState({searchResults: data});
+          } else {
+            this.setState({searchResults: []});
+          }
+        });
+
+    }
+
+  }
   getBooks = () => {
     BooksAPI
       .getAll()
       .then(data => this.setState({books: data}))
-      .catch(err => console.log('there was an error getting all the book!'));
+      .catch(err => console.log('there was an error getting all the books!'));
   }
   updateBooks = (book, shelf) => {
     BooksAPI
@@ -30,6 +48,9 @@ class BooksApp extends React.Component {
   }
   componentDidMount = () => {
     this.getBooks();
+    BooksAPI
+      .getAll()
+      .catch(err => console.log('there was an error getting all the books!'));
   }
   showSearch = () => {
     this.setState({showSearchPage: true});
@@ -41,7 +62,12 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         {this.state.showSearchPage
-          ? (<Search goHome={this.goHome}/>)
+          ? (<Search
+            updateQuery={this.updateQuery}
+            query={this.state.query}
+            searchResults={this.state.searchResults}
+            updateBooks={this.updateBooks}
+            goHome={this.goHome}/>)
           : (
             <div>
               <Header/>
