@@ -19,7 +19,7 @@ const Search = (props: any) => {
       <div className="search-books-results">
         <ol className="books-grid">
           {props.searchResults && !props.searchResults.error
-            ? (props.searchResults.map((element: any) => <li key={element.id}>
+            ? (props.searchResults.map((element: any, index: number) => <li key={element.id}>
               <div className="book">
                 <div className="book-top">
                   {element.imageLinks
@@ -52,7 +52,7 @@ const Search = (props: any) => {
                   ? (
                     <div className="book-authors">{element
                         .authors
-                        .map((author: any) => <p key={element.authors[0]}>{author}</p>)}</div>
+                        .map((author: any) => <p key={Math.random()}>{author}</p>)}</div>
                   )
                   : <div/>}
               </div>

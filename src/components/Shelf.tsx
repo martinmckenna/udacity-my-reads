@@ -8,7 +8,7 @@ const Shelf = (props: any) => {
             <h2 className="bookshelf-title">{props.category}</h2>
             <div className="bookshelf-books">
                 <ol className="books-grid">{props.filteredList
-                        .map((element: any) => <li key={element.id}>
+                        .map((element: any, index: number) => <li key={element.id}>
                             <div className="book">
                                 <div className="book-top">
                                     <div className="book-cover"><img
@@ -35,7 +35,7 @@ const Shelf = (props: any) => {
                                 <div className="book-title">{element.title}</div>
                                 <div className="book-authors">{element
                                         .authors
-                                        .map((author: any) => <p key={element.authors[0]}>{author}</p>)}</div>
+                                        .map((author: any) => <p key={Math.random()}>{author}</p>)}</div>
                             </div>
                         </li>)}</ol>
             </div>

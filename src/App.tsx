@@ -6,12 +6,7 @@ import Shelves from './views/Shelves';
 import Header from './components/Header';
 import { Route } from 'react-router-dom';
 
-interface MyInterface {
-  getBooks: Function;
-  updateBooks: Function;
-}
-
-class BooksApp extends React.Component<{}, {}> implements MyInterface {
+class BooksApp extends React.Component<{}, {}> {
   state = {
     books: [],
     searchResults: [],
