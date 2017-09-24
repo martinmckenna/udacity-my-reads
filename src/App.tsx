@@ -10,7 +10,8 @@ class BooksApp extends React.Component<{}, {}> {
   state = {
     books: [],
     searchResults: [],
-    query: ''
+    query: '',
+    defaultValueForSearchedBook: 'none'
   };
   updateQuery = (query: string): void => {
     this.setState({query: query});
@@ -24,7 +25,6 @@ class BooksApp extends React.Component<{}, {}> {
             this.setState({searchResults: []});
           }
         });
-
     }
   }
   getBooks = (): any => {
@@ -34,7 +34,7 @@ class BooksApp extends React.Component<{}, {}> {
       .catch(err => console.log(`${err}: there was an error getting all the books!`));
       
   }
-updateBooks = (book: {}, shelf: string): void => {
+updateBooks = (book: any, shelf: string): void => {
     BooksAPI
       .update(book, shelf)
       .then((data: any) => this.getBooks())
@@ -53,6 +53,8 @@ updateBooks = (book: {}, shelf: string): void => {
           path="/search"
           render={() => (
             <Search
+              defaultValueForSearchedBook={this.state.defaultValueForSearchedBook}
+              addedBooks={this.state.books}
               updateQuery={this.updateQuery}
               query={this.state.query}
               searchResults={this.state.searchResults}
