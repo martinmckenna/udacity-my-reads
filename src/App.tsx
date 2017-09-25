@@ -6,7 +6,13 @@ import Shelves from './views/Shelves';
 import Header from './components/Header';
 import { Route } from 'react-router-dom';
 
-class BooksApp extends React.Component<{}, {}> {
+interface State {
+  books: Array<{}>;
+  searchResults: Array<{}>;
+  query: string;
+}
+
+class BooksApp extends React.Component<{}, State> {
   state = {
     books: [],
     searchResults: [],
@@ -29,15 +35,15 @@ class BooksApp extends React.Component<{}, {}> {
         });
     }
   }
-  getBooks = (): any => {
+  getBooks = (): void => {
     // simply get a list of all the books on the shelf and send them to the state
-    return BooksAPI
+    BooksAPI
       .getAll()
       .then(data => this.setState({books: data}))
       .catch(err => console.log(`${err}: there was an error getting all the books!`));
       
   }
-updateBooks = (book: any, shelf: string): void => {
+updateBooks = (book: {}, shelf: string): void => {
   // takes two arguments. The book in question and the shelf we want to send it to
     BooksAPI
       .update(book, shelf)
