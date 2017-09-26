@@ -1,5 +1,6 @@
 import * as React from 'react';
 import '../styles/App.css';
+import { Debounce } from 'react-throttle';
 
 import GoHome from '../components/GoHome';
 
@@ -9,11 +10,13 @@ const Search = (props: any) => {
       <div className="search-books-bar">
         <GoHome goHome={props.goHome}/>
         <div className="search-books-input-wrapper">
-          <input
-            onChange={event => props.updateQuery(event.target.value.trim())}
-            type="text"
-            placeholder="Search by title or author"
-          />
+          <Debounce time="200" handler="onChange">
+            <input
+              onChange={event => props.updateQuery(event.target.value.trim())}
+              type="text"
+              placeholder="Search by title or author"
+            />
+          </Debounce>
         </div>
       </div>
       <div className="search-books-results">
@@ -31,7 +34,7 @@ const Search = (props: any) => {
                         height: 193
                       }}
                         alt="The book cover"
-                        src={element.imageLinks.thumbnail}
+                        src={(!!element.imageLinks.thumbnail) ? element.imageLinks.thumbnail : '/'}
                       /></div>
                     )
                     : <div/>}

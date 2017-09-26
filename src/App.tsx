@@ -20,6 +20,7 @@ class BooksApp extends React.Component<{}, State> {
   };
   // updateQuery is updating the state with the typed input and searching the DB with that input
   updateQuery = (query: string): void => {
+    console.log('searching!');
     this.setState({query: query});
     if (query !== '') {
       BooksAPI
@@ -57,11 +58,15 @@ class BooksApp extends React.Component<{}, State> {
       .catch(err => console.log(`${err}: there was an error getting all the books!`));
       
   }
-updateBooks = (book: {}, shelf: string): void => {
+updateBooks = (book: any, shelf: string): void => {
   // takes two arguments. The book in question and the shelf we want to send it to
-    BooksAPI
-      .update(book, shelf)
-      .then((data: any) => this.getBooks())
+BooksAPI.update(book, shelf)
+    .then((data: any) => {
+      book.shelf = shelf;
+      let updatedBooks: Array<Object> = this.state.books.filter((b: any) => {
+        return b.id !== book.id; }).concat(book);
+      this.setState({books: updatedBooks});
+  })
       .catch((err: any) => console.log(`${err}: there was an error updating all the books!`));
   }
   componentDidMount(): void {

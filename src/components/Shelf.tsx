@@ -16,7 +16,7 @@ const Shelf = (props: any) => {
                             height: 193
                         }}
                                         alt="The book cover"
-                                        src={element.imageLinks.thumbnail}
+                                        src={(!!element.imageLinks.thumbnail) ? element.imageLinks.thumbnail : '/'}
                                     /></div>
                                     <div className="book-shelf-changer">
                                         <select
