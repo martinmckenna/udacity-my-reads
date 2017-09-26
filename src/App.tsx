@@ -25,13 +25,27 @@ class BooksApp extends React.Component<{}, State> {
       BooksAPI
         .search(query, 20)
         .then(data => {
-          // if we have results, send them to the state
-          // if not, just give us back an empty array
+          if (!!data && data.length) {
+          const results: Array<Object> = data.map((searchResult: any) => {
+            const existingBook: any = this
+              .state
+              .books
+              .find((addedBook: any) => addedBook.id === searchResult.id);
+            searchResult.shelf = !!existingBook
+              ? existingBook.shelf
+              : 'none';
+            return searchResult;
+          });
+          // if we have results, send them to the state if not, just give us back an empty
+          // array
           if (!data.error) {
-            this.setState({searchResults: data});
+            this.setState({searchResults: results});
           } else {
             this.setState({searchResults: []});
           }
+        } else {
+          this.setState({searchResults: []});
+        }
         });
     }
   }

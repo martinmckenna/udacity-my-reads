@@ -37,7 +37,7 @@ const Search = (props: any) => {
                     : <div/>}
                   <div className="book-shelf-changer">
                     <select
-                      defaultValue="none"
+                      defaultValue={element.shelf}
                       onChange={(event) => props.updateBooks(element, event.target.value)}
                     >
                       <option value="none" disabled={true}>Move to...</option>
