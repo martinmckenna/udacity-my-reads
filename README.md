@@ -1,7 +1,7 @@
 # Installing the App
+* Must have working node envoirnment
 * Either clone or download this repo
 * run `npm install` to install dependencies
-* you may also have to run `npm install --save @types/react-router-dom` if react-router-dom is not recognized
 * run `npm start` to start app
 
 # Using the App
